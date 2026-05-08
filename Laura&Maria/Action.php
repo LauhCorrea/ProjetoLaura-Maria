@@ -7,6 +7,7 @@
 
     $preco = $_POST['preco'] . "<br>";
     $cliente = $_POST['cliente'];
+    $livro = $_POST['livro'];
 
     
 
