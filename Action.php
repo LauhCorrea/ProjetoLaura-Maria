@@ -9,19 +9,22 @@ require "Pagamento.php";
 require "CartaoCredito.php";
 require "CartaoDebito.php";
 
-// RECEBER DADOS DO FORMULÁRIO
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    $tipoCliente = $_POST['tipoCliente'];
+
     $nomeCliente = $_POST['cliente'];
-    $cpf = $_POST['cpf'];
     $livro = $_POST['livro'];
-    $preco = $_POST['preco'];
+    $preco = (int) $_POST['preco'];
     $genero = $_POST['genero'];
 
-    // CRIAR OBJETO GÊNERO
+    $tipoPagamento = $_POST['pagamento'];
+    $numeroCartao = (int) $_POST['numeroCartao'];
+
+    // GÊNERO
     $meuGenero = new Genero($genero);
 
-    // CRIAR OBJETO LIVRO
+    // LIVRO
     $meuLivro = new Livro(
         $livro,
         "Machado de Assis",
@@ -29,29 +32,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $meuGenero
     );
 
-    // CRIAR OBJETO CLIENTE
-    $meuCliente = new PessoaCliente(
-        $nomeCliente,
-        $cpf
-    );
+    // CLIENTE
+    if ($tipoCliente == "cliente") {
 
-    // CRIAR OBJETO PAGAMENTO
-    $meuPagamento = new CartaoDebito(
-        $valorLivro,
-         $numeroCartao
-    );
+        $cpf = (int) $_POST['cpf'];
 
-    // OU
-    // $meuPagamento = new CartaoCredito();
+        $meuCliente = new PessoaCliente(
+            $nomeCliente,
+            $cpf
+        );
 
-    // CRIAR VENDA
+    } else {
+
+        $meuCliente = new PessoaAnonima(
+            $nomeCliente
+        );
+
+    }
+
+    // PAGAMENTO
+    if ($tipoPagamento == "credito") {
+
+        $numeroParcelas = (int) $_POST['numeroParcelas'];
+
+        $meuPagamento = new CartaoCredito(
+            $numeroParcelas,
+            $numeroCartao
+        );
+
+    } else {
+
+        $meuPagamento = new CartaoDebito(
+            $preco,
+            $numeroCartao
+        );
+
+    }
+
+    // VENDA
     $minhaVenda = new Venda(
         $meuLivro,
         $meuCliente,
         $meuPagamento
     );
 
-    // EXECUTAR VENDA
     $minhaVenda->concretizarVenda();
 }
 

@@ -18,4 +18,9 @@ class PessoaAnonima
     {
         $this->nome = $nome;
     }
+
+    public function imprimir(): void
+    {
+        echo "Nome: {$this->nome}";
+    }
 }
