@@ -1,6 +1,6 @@
 <?php
-    interface Pagamento {
 
-        public function pagar($dados);
-
-    }
+interface Pagamento
+{
+    public function pagar($dados);
+}

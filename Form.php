@@ -21,7 +21,7 @@
             padding: 25px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-            width: 300px;
+            width: 350px;
         }
 
         h1 {
@@ -35,7 +35,8 @@
             font-weight: bold;
         }
 
-        input[type="text"], select {
+        input[type="text"],
+        select {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
@@ -65,20 +66,28 @@
 
     <div class="container">
 
-        <h1>Formulário</h1>
+        <h1>Venda de Livros</h1>
 
         <form action="Action.php" method="post">
 
-            <label for="cliente">Cliente</label>
-            <input type="text" name="cliente" id="cliente">
+            <label for="tipoCliente">Tipo de Cliente</label>
+            <select name="tipoCliente" id="tipoCliente">
+                <option value="anonima">Pessoa Anônima</option>
+                <option value="cliente">Pessoa Cliente</option>
+            </select>
+
+            <label for="cliente">Nome do Cliente</label>
+            <input type="text" name="cliente" id="cliente" required>
+
+            <label for="cpf">CPF</label>
+            <input type="text" name="cpf" id="cpf">
 
             <label for="livro">Livro</label>
-            <input type="text" name="livro" id="livro">
+            <input type="text" name="livro" id="livro" required>
 
             <label for="preco">Preço</label>
-            <input type="text" name="preco" id="preco">
+            <input type="text" name="preco" id="preco" required>
 
-            <!-- GÊNERO ADICIONADO AQUI -->
             <label for="genero">Gênero</label>
             <select name="genero" id="genero">
                 <option value="Romance">Romance</option>
@@ -88,7 +97,15 @@
                 <option value="Terror">Terror</option>
             </select>
 
-            <input type="submit" value="Enviar">
+            <label for="pagamento">Forma de Pagamento</label>
+            <select name="pagamento" id="pagamento">
+                <option value="credito">Cartão de Crédito</option>
+                <option value="debito">Cartão de Débito</option>
+                <label>Número do Cartão:</label>
+                <input type="text" name="numeroCartao" required>
+            </select>
+
+            <input type="submit" value="Finalizar Venda">
 
         </form>
 

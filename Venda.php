@@ -4,14 +4,14 @@ class Venda {
 
     private $livro;
     private $cliente;
+    private $pagamento;
 
-    public function __construct($livro, $cliente) {
+    public function __construct($livro, $cliente, Pagamento $pagamento) {
 
         $this->livro = $livro;
         $this->cliente = $cliente;
+        $this->pagamento = $pagamento;
     }
-
-    // FINALIZAR VENDA
 
     public function concretizarVenda() {
 
@@ -21,14 +21,11 @@ class Venda {
 
         $this->livro->imprimir();
 
+        $this->pagamento->pagar($this->livro->getPreco());
     }
-
-    // CANCELAR VENDA
 
     public function cancelarVenda() {
 
         echo "<h2>Venda cancelada.</h2>";
     }
 }
-
-?>

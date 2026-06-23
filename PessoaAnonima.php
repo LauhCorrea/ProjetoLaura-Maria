@@ -1,14 +1,21 @@
 <?php
-    class PessoaAnonima {
 
-        protected $nome;
+class PessoaAnonima
+{
+    protected string $nome;
 
-        public function getNome() {
-            return $this->nome;
-        }
-
-        public function setNome($nome) {
-            $this->nome = $nome;
-        }  
+    public function __construct(string $nome)
+    {
+        $this->nome = $nome;
     }
-?>
+
+    public function getNome(): string
+    {
+        return $this->nome;
+    }
+
+    public function setNome(string $nome): void
+    {
+        $this->nome = $nome;
+    }
+}
